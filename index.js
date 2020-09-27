@@ -4,8 +4,8 @@ const generateMark = require('./utils/generateMarkdown')
 
 
 // array of questions for user
-const questions = () => {
-    return inquirer.prompt([
+const questions = 
+  [
         {
             type: 'input',
             name: 'title',
@@ -34,7 +34,7 @@ const questions = () => {
           },
           {
             type: 'input',
-            name: 'intall',
+            name: 'install',
             message: 'Provide input installation instructions for the project (Required)',
             validate: installationInput => {
                 if (installationInput) {
@@ -58,25 +58,16 @@ const questions = () => {
                 }
             }
           },
-          //! still need to sort out multiple credit entiries 
-          {
-            type: 'confirm',
-            name: 'confirmCredits',
-            message: 'Was there anyone else involved on the project?',
-            default: true,
-          },
           {
             type: 'input',
             name: 'credits',
             message: 'Provide name of contributor: ',
-            message: 'provide contributors username: ',
-            when: ({ confirmCredits }) => confirmCredits
           },
           {
             type: 'checkbox',
             name: 'license',
-            message: 'choose a license for the project: ',
-            choices: [' license preferred by the community', 'MIT License', ' GNU GPLv3', ' SIL Open Font License 1.1', 'CC0-1.0', 'The Unlicense']
+            message: 'choose ONE license for the project: ',
+            choices: ['mit', 'gpl', 'apache', 'isc']
           },
         {
           type: 'input',
@@ -116,22 +107,29 @@ const questions = () => {
                 return false;
               }
             }
-          },
-        
-    ]);
-}
+          },  
+ ]
 
 // function to write README file
-function writeToFile(fil, data) {
-    
-}
+function writeToFile(data) {
+    fs.writeFile('./dist/README.md', data, err =>{
+      if (err) {
+        throw err;
+      } else {
+        console.log('file Created')
+      }
+    })
+  };
 
 // function to initialize program
 function init() {
+  inquirer.prompt(questions).then(answers => {
+   const pageMarkdown = generateMark(answers)
 
+    writeToFile(pageMarkdown)
+  })
+  
 }
 
 // function call to initialize program
 init();
-
-questions()
