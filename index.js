@@ -62,12 +62,28 @@ const questions =
             type: 'input',
             name: 'credits',
             message: 'Provide name of contributor: ',
+            validate: creditsInput => {
+              if (creditsInput) {
+              return true;
+              } else {
+                  console.log('Please enter a description of the project');
+                  return false;
+              }
+          }
           },
           {
             type: 'checkbox',
             name: 'license',
             message: 'choose ONE license for the project: ',
-            choices: ['mit', 'gpl', 'apache', 'isc']
+            choices: ['mit', 'gpl', 'apache', 'isc'],
+            validate: licenseInput => {
+              if (licenseInput) {
+              return true;
+              } else {
+                  console.log('Please enter a description of the project');
+                  return false;
+              }
+          }
           },
         {
           type: 'input',
