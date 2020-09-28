@@ -23,7 +23,7 @@ function generateMarkdown(data) {
   * [Tests](#tests)
 
   <a name="install"></a>
-  ## Install
+  ## Installation
 
   ${data.install}
 
@@ -42,7 +42,7 @@ function generateMarkdown(data) {
 
   Click link for more info on this applications license
 
-  [License Info](https://choosealicense.com/licenses/${data.license}/)
+  [License Info](https://choosealicense.com/licenses/${data.license}/) 
   
   <a name="questions"></a>
   ## Questions
